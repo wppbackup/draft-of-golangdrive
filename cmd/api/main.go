@@ -1,7 +1,8 @@
 package main
 
 import (
-	"fmt"
+	"log"
+		"net/http"
 	
 	"github.com/go-chi/chi/v5"
 	
@@ -15,8 +16,11 @@ func main () {
 
 	db, err := database.NewConnection()
 	if err != nil {
-		fmt.Print("Error connecting to the database")
+		log.Fatalf("Error connecting to the database: %v", err)
 	}
 
 	users.SetRoutes(r, db)
+
+	log.Println("Server running on port 8080")
+	log.Fatal(http.ListenAndServe(":8080", r))
 }

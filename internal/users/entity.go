@@ -66,20 +66,3 @@ func (u *User) Validate() error {
 
 	return nil
 }
-
-func New(name, login, password string) (*User, error) {
-
-	u := User{Name: name, Login: login, Password: password, ModifiedAt: time.Now()}
-
-	err := u.SetEncryptedPassword(password)
-	if err != nil {
-		return nil, err
-	}
-
-	err = u.Validate()
-	if err != nil {
-		return nil, err
-	}
-
-	return &u, nil
-}
