@@ -2,7 +2,6 @@ package users
 
 import (
 	"errors"
-	"fmt"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -32,7 +31,7 @@ type User struct {
 	LastLogin  time.Time `json:"last_login"`
 }
 
-func (u *User) SetEncryptedPassword(password string) error {
+func (u *User) SetHashedPassword(password string) error {
 
 	if password == "" {
 		return ErrPasswordRequired
@@ -44,12 +43,12 @@ func (u *User) SetEncryptedPassword(password string) error {
 		return ErrPasswordTooLong
 	}
 
-	encryptedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return errors.New("Error hashing the password")
 	}
 
-	u.Password = fmt.Sprintf("%x", encryptedPassword)
+	u.Password = string(hashedPassword)
 
 	return nil
 

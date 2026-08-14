@@ -2,15 +2,15 @@ package main
 
 import (
 	"log"
-		"net/http"
-	
+	"net/http"
+
 	"github.com/go-chi/chi/v5"
-	
+
 	"drive-chi/internal/users"
 	"drive-chi/pkg/database"
 )
 
-func main () {
+func main() {
 
 	r := chi.NewRouter()
 
@@ -23,4 +23,5 @@ func main () {
 
 	log.Println("Server running on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
+	
 }
