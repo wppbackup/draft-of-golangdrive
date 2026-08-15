@@ -31,7 +31,7 @@ type User struct {
 	LastLogin  time.Time `json:"last_login"`
 }
 
-func (u *User) SetHashedPassword(password string) error {
+func (u *User) SetHashedOriginalPassword(password string) error {
 
 	if password == "" {
 		return ErrPasswordRequired
@@ -64,4 +64,5 @@ func (u *User) Validate() error {
 	}
 
 	return nil
+	
 }

@@ -9,6 +9,7 @@ import (
 )
 
 func NewConnection() (*sql.DB, error) {
+	
 	psqlconn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		os.Getenv("DB_HOST"),
 		os.Getenv("DB_PORT"),
@@ -27,4 +28,5 @@ func NewConnection() (*sql.DB, error) {
 	}
 
 	return db, nil
+	
 }
